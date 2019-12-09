@@ -1,0 +1,51 @@
+.modal-background {
+    display: none;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,0.4)
+}
+
+#modal-content {
+    margin: 30px auto;
+}
+
+.modal-content {
+    width: 50%;
+    background-color: white;
+    padding: 80px;
+}
+
+#draggable-modal-content {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+}
+
+#calendar-ui {
+    display: none;
+    position: absolute;
+}
+
+#calendar-ui table {
+    background: #eee;
+}
+
+#calendar-ui thead {
+    color: #ddd;
+}
+
+#calendar-ui tbody td {
+    text-align: center;
+}
+
+#calendar-ui tbody td:hover {
+    background: #1abc9c;
+}
+
+#calendar-ui tbody {
+    cursor: pointer;
+}
