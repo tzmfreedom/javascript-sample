@@ -52,7 +52,8 @@
 }
 
 #draggable-list {
-  width: 300px;
+    width: 300px;
+    padding: 0;
 }
 
 #draggable-list li {
@@ -66,4 +67,27 @@
 
 #draggable-list .drag-active {
     background-color: greenyellow;
+}
+
+#file-drop-area {
+    float: left;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+    border: 1px solid black;
+}
+
+#file-drop-area.active {
+    border: 1px solid red;
+    background-color: yellow;
+}
+
+#file-content {
+    display: none;
+    margin-top: 0px;
+    margin-left: 30px;
+    float: left;
+    background-color: #eee;
+    padding: 20px;
 }

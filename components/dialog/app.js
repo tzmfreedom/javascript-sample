@@ -164,3 +164,24 @@ Array.from(draggableList.children).forEach((child) => {
   child.ondragend = ondrop;
 });
 
+
+const dropArea = document.getElementById('file-drop-area');
+dropArea.ondragenter = (e) => {
+  e.preventDefault();
+  e.target.classList.add('active');
+};
+dropArea.ondragleave = (e) => {
+  e.target.classList.remove('active');
+}
+dropArea.ondragover = (e) => e.preventDefault();
+dropArea.ondrop = (e) => {
+  e.preventDefault();
+  e.target.classList.remove('active');
+  const fr = new FileReader();
+  fr.onload = (e) => {
+    const content = document.getElementById('file-content');
+    content.textContent = e.target.result;
+    content.style.display = 'block';
+  };
+  fr.readAsText(e.dataTransfer.files[0]);
+};
