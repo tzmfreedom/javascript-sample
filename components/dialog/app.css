@@ -84,6 +84,8 @@
 }
 
 #file-content {
+    white-space: pre-wrap;
+    width: 700px;
     display: none;
     margin-top: 0px;
     margin-left: 30px;
