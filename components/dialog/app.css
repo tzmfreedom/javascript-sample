@@ -51,6 +51,19 @@
     cursor: pointer;
 }
 
+#draggable-list {
+  width: 300px;
+}
+
 #draggable-list li {
+    list-style: none;
     cursor: pointer;
+    padding: 10px;
+    background-color: green;
+    color: white;
+    border: 1px white solid;
+}
+
+#draggable-list .drag-active {
+    background-color: greenyellow;
 }
