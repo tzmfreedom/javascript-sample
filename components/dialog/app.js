@@ -75,7 +75,8 @@ calendarBtn.onclick = (e) => {
   calendarUi.style.display = 'block';
 };
 
-calendarPrevious.onclick = (e) => {
+calendarPrevious.onmousedown = (e) => {
+  e.preventDefault();
   if (currentMonth === 0) {
     currentYear--;
     currentMonth = 11;
@@ -85,7 +86,8 @@ calendarPrevious.onclick = (e) => {
   showCalendar(currentYear, currentMonth);
 };
 
-calendarNext.onclick = (e) => {
+calendarNext.onmousedown = (e) => {
+  e.preventDefault();
   if (currentMonth === 11) {
     currentYear++;
     currentMonth = 0;
@@ -115,7 +117,6 @@ const showCalendar = (year, month) => {
     col.className = 'day';
     col.textContent = (i+1).toString();
     col.onmousedown = () => {
-      // debugger;
       inputDate.value = `${year}-${(month+1).toString().padStart(2, '0')}-${col.textContent.padStart(2, '0')}`;
       calendarUi.style.display = 'none';
     };

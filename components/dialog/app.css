@@ -29,6 +29,10 @@
 #calendar-ui {
     display: none;
     position: absolute;
+    z-index: 10;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid black;
 }
 
 #calendar-ui table {
