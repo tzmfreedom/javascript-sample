@@ -129,3 +129,38 @@ const showCalendar = (year, month) => {
 }
 
 showCalendar(currentYear, currentMonth);
+
+const ondragstart = (e) => {
+  e.target.classList.add("drag-active");
+};
+const ondrag = (e) => {
+  e.preventDefault();
+  const x = e.clientX;
+  const y = e.clientY;
+  const selectedItem = e.target;
+  const list = selectedItem.parentNode;
+  let swapItem = document.elementFromPoint(x, y) === null ? selectedItem : document.elementFromPoint(x, y);
+  if (list === swapItem.parentNode) {
+    swapItem = swapItem !== selectedItem.nextElementSibling ? swapItem : swapItem.nextElementSibling;
+    if (selectedItem !== swapItem) {
+      console.log(selectedItem)
+      console.log(swapItem)
+      list.insertBefore(selectedItem, swapItem);
+    }
+  }
+};
+const ondragover = (e) => e.preventDefault();
+const ondrop = (e) => {
+  e.preventDefault();
+  e.target.classList.remove("drag-active");
+};
+
+const draggableList = document.getElementById('draggable-list');
+Array.from(draggableList.children).forEach((child) => {
+  child.setAttribute('draggable', 'true');
+  child.ondragstart = ondragstart;
+  child.ondrag = ondrag;
+  child.ondragover = ondragover;
+  child.ondragend = ondrop;
+});
+

@@ -23,6 +23,7 @@
     position: absolute;
     left: 100px;
     top: 100px;
+    cursor: pointer;
 }
 
 #calendar-ui {
@@ -47,5 +48,9 @@
 }
 
 #calendar-ui tbody {
+    cursor: pointer;
+}
+
+#draggable-list li {
     cursor: pointer;
 }
