@@ -16,7 +16,7 @@
 .modal-content {
     width: 50%;
     background-color: white;
-    padding: 80px;
+    /*padding: 80px;*/
 }
 
 #draggable-modal-content {
@@ -96,4 +96,15 @@
     float: left;
     background-color: #eee;
     padding: 20px;
+}
+
+#modal-bootstrap {
+    cursor: grab;
+    width: 20px;
+    height: 20px;
+    background-color: #eee;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }

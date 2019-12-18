@@ -23,8 +23,23 @@ btn2.onclick = () => {
 const mouseupOriginal = document.onmouseup;
 const mousemoveOriginal = document.onmousemove;
 
-dragElement(document.getElementById('draggable-modal-content'));
-
+const draggableModal = document.getElementById('draggable-modal-content');
+dragElement(draggableModal);
+const el = document.getElementById('modal-bootstrap');
+el.onmousedown = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  document.onmouseup = () => {
+    document.onmouseup = mouseupOriginal;
+    document.onmousemove = mousemoveOriginal
+  };
+  document.onmousemove = (e) => {
+    const height = e.clientY - draggableModal.offsetTop + 5;
+    const width = e.clientX - draggableModal.offsetLeft + 5;
+    draggableModal.style.width = width + 'px';
+    draggableModal.style.height = height + 'px';
+  }
+}
 function dragElement(elm) {
   let x, y = 0;
   elm.onmousedown = (e) => {
