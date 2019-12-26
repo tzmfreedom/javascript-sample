@@ -14,3 +14,6 @@ test/module:
 	  tsc module.ts --module $$module && cat module.js; \
 	done
 
+.PHONY: test/lib
+test/lib:
+	tsc lib.ts --noLib
