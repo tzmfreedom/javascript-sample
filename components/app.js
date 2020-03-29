@@ -62,7 +62,6 @@ function dragElement(elm) {
   };
 }
 
-
 const calendarBtn = document.getElementById('calendar-button');
 const inputDate = document.getElementById('input-date')
 const calendarUi = document.getElementById('calendar-ui');
@@ -201,3 +200,77 @@ dropArea.ondrop = (e) => {
   };
   fr.readAsText(e.dataTransfer.files[0]);
 };
+
+//---
+
+(() => {
+  let dragStartY = 0;
+  const height = 52;
+  let fromIndex = -1;
+  let toIndex = -1;
+  let data = ['One', 'Two', 'Three', 'Four'];
+  const draggableListTrans = document.getElementById(('draggable-list-transform'));
+  const render = () => {
+    draggableListTrans.textContent = '';
+    draggableListTrans.append(...data.map(d => {
+      const e = document.createElement('li');
+      e.textContent = d;
+      return e;
+    }));
+    Array.from(draggableListTrans.children).forEach((child, i) => {
+      child.onmousedown = (e) => {
+        e.preventDefault();
+        fromIndex = i;
+        toIndex = i;
+        dragStartY = e.pageY;
+
+        Array.from(draggableListTrans.children).forEach((child, i) => {
+          if (i === fromIndex) {
+            child.style.position = 'absolute';
+            child.style.transform = `scale(1.2,1.2)`;
+            child.style.transition = 'ease-out 0.1s';
+            return;
+          }
+          const index = i < fromIndex ? i + 1 : i;
+          if (index > toIndex) {
+            child.style.transform = `translateY(${height}px)`;
+            return;
+          }
+          child.style.transform = '';
+        });
+
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+      };
+    });
+  };
+  const move = (from, to) => {
+    const deleted = data.splice(from, 1);
+    data.splice(to, 0, ...deleted);
+  };
+  const onMouseMove = (e) => {
+    const moveY = e.pageY - dragStartY;
+    toIndex = fromIndex + Math.floor(moveY / height + 0.5);
+    Array.from(draggableListTrans.children).forEach((child, i) => {
+      if (i === fromIndex) {
+        child.style.transform = `translateY(${moveY}px) scale(1.2,1.2)`;
+        return;
+      }
+      child.style.transition = '0.2s ease-out';
+      const index = i < fromIndex ? i + 1 : i;
+      if (index > toIndex) {
+        child.style.transform = `translateY(${height}px)`;
+        return;
+      }
+      child.style.transform = '';
+    });
+    draggableListTrans.children[fromIndex].style.position = 'absolute';
+  };
+  const onMouseUp = () => {
+    move(fromIndex, toIndex);
+    render();
+    window.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('mouseup', onMouseUp);
+  };
+  render();
+})();
